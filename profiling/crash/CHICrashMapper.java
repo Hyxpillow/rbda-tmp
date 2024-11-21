@@ -35,7 +35,7 @@ public class CHICrashMapper
 
         for (int i = 0; i < splitLine.size(); i++) {
             String columeName = columnNames[i];
-            String columeValue = splitLine[i];
+            String columeValue = splitLine.get(i);
             if (columeName == "CRASH_DATE") {
                 columeName = "CRASH_YEAR";
                 columeValue = columeValue.substring(6, 10);
