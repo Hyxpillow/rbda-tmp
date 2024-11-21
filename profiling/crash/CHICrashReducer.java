@@ -17,7 +17,6 @@ public class CHICrashReducer
         } else if (key.toString().equals("POSTED_SPEED_LIMIT")) {
             getMax(values, outputStr);
             getMin(values, outputStr);
-            getAvg(values, outputStr);
         } else if (key.toString().equals("INJURIES_TOTAL")) {
             getSum(values, outputStr);
         }
@@ -65,19 +64,19 @@ public class CHICrashReducer
         outputStr.append(" ");
     }
 
-    private void getAvg(Iterable<Text> values, StringBuilder outputStr) {
-        int totalCount = 0;
-        long totalSum = 0;
-        for (Text value : values) {
-            if (!value.toString().equals("")) {
-                totalSum += Integer.parseInt(value.toString());
-                totalCount += 1;
-            }
-        }
-        outputStr.append("average:");
-        outputStr.append(totalSum / totalCount);
-        outputStr.append(" ");
-    }
+    // private void getAvg(Iterable<Text> values, StringBuilder outputStr) {
+    //     int totalCount = 0;
+    //     long totalSum = 0;
+    //     for (Text value : values) {
+    //         if (!value.toString().isEmpty()) {
+    //             totalSum += Integer.parseInt(value.toString());
+    //             totalCount += 1;
+    //         }
+    //     }
+    //     outputStr.append("average:");
+    //     outputStr.append(totalSum / totalCount);
+    //     outputStr.append(" ");
+    // }
 
     private void getSum(Iterable<Text> values, StringBuilder outputStr) {
         long totalSum = 0;
