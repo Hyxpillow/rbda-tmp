@@ -14,5 +14,5 @@ run: all
 	hadoop fs -cat project/output/part-r-00000
 
 clean:
-	hadoop fs -cat project/output/part-r-00000
+	hadoop fs -rm -r project/output
 	rm -f *.class crash.jar
