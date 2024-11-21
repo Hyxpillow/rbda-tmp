@@ -18,7 +18,7 @@ public class CHICrashReducer
             getMax(values, outputStr);
             getMin(values, outputStr);
             getAvg(values, outputStr);
-        } else (key.get() == "INJURIES_TOTAL") {
+        } else if (key.get() == "INJURIES_TOTAL") {
             getSum();
         }
         context.write(key, new Text(outputStr.toString()));
