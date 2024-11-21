@@ -2,7 +2,7 @@
 .PHONY: all clean
 
 all:
-	javac -classpath hadoop classpath *.java
+	javac -classpath `hadoop classpath` *.java
 	jar cvf crash.jar *.class
 
 clean:
