@@ -29,7 +29,9 @@ public class CHICrashMapper
     @Override
     public void map(LongWritable key, Text value, Context context)
         throws IOException, InterruptedException {
-
+        if (key.get() == 0) {
+            return;
+        }
         String line = value.toString();
         List<String> splitLine = parseCSVLine(line);
 
