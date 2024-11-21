@@ -42,7 +42,7 @@ public class CHICrashReducer
             }
         }
         outputStr.append("missingRate:");
-        outputStr.append(String.format("%.2f%%", ((double)nullCount / totalCount) * 100););
+        outputStr.append(String.format("%.2f%%", ((double)nullCount / totalCount) * 100));
         outputStr.append(" ");
     }
 
