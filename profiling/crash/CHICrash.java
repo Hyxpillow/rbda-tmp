@@ -18,8 +18,7 @@ public class CHICrash {
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         job.setMapperClass(CHICrashMapper.class);
-        job.setCombinerClass(CHICrashMapper.class);
-        job.setReducerClass(CHICrashMapper.class);
+        job.setReducerClass(CHICrashReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 	    job.setNumReduceTasks(5);
