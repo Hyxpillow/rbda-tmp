@@ -2,6 +2,9 @@ import java.io.IOException;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
+import java.util.List;
+import java.util.ArrayList;
+
 public class CHICrashReducer
     extends Reducer<Text, Text, Text, Text> {
     @Override
