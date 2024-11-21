@@ -17,7 +17,7 @@ public class CHICrashReducer
         }
 
         StringBuilder outputStr = new StringBuilder();
-        getNull(valueStrs, outputStr);
+        getMissingRate(valueStrs, outputStr);
         
         if (key.toString().equals("CRASH_YEAR")) {
             getMax(valueStrs, outputStr);
@@ -25,13 +25,14 @@ public class CHICrashReducer
         } else if (key.toString().equals("POSTED_SPEED_LIMIT")) {
             getMax(valueStrs, outputStr);
             getMin(valueStrs, outputStr);
+            getAvg(valueStrs, outputStr);
         } else if (key.toString().equals("INJURIES_TOTAL")) {
             getSum(valueStrs, outputStr);
         }
         context.write(key, new Text(outputStr.toString()));
     }
 
-    private void getNull(List<String> values, StringBuilder outputStr) {
+    private void getMissingRate(List<String> values, StringBuilder outputStr) {
         int totalCount = 0;
         int nullCount = 0;
         for (String value : values) {
@@ -40,8 +41,8 @@ public class CHICrashReducer
                 nullCount += 1;
             }
         }
-        outputStr.append("nullCount:");
-        outputStr.append(nullCount);
+        outputStr.append("missingRate:");
+        outputStr.append(String.format("%.2f%%", ((double)nullCount / totalCount) * 100););
         outputStr.append(" ");
     }
 
