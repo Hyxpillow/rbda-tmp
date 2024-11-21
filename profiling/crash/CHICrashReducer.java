@@ -7,28 +7,33 @@ public class CHICrashReducer
     @Override
     public void reduce(Text key, Iterable<Text> values, Context context)
         throws IOException, InterruptedException {
+        
+        List<String> valueStrs = new ArrayList<>();
+        for (Text value : values) {
+            valueStrs.add(value.toString());
+        }
 
         StringBuilder outputStr = new StringBuilder();
-        getNull(values, outputStr);
+        getNull(valueStrs, outputStr);
         
         if (key.toString().equals("CRASH_YEAR")) {
-            getMax(values, outputStr);
-            getMin(values, outputStr);
+            getMax(valueStrs, outputStr);
+            getMin(valueStrs, outputStr);
         } else if (key.toString().equals("POSTED_SPEED_LIMIT")) {
-            getMax(values, outputStr);
-            getMin(values, outputStr);
+            getMax(valueStrs, outputStr);
+            getMin(valueStrs, outputStr);
         } else if (key.toString().equals("INJURIES_TOTAL")) {
-            getSum(values, outputStr);
+            getSum(valueStrs, outputStr);
         }
         context.write(key, new Text(outputStr.toString()));
     }
 
-    private void getNull(Iterable<Text> values, StringBuilder outputStr) {
+    private void getNull(List<String> values, StringBuilder outputStr) {
         int totalCount = 0;
         int nullCount = 0;
-        for (Text value : values) {
+        for (String value : values) {
             totalCount += 1;
-            if (value.toString().equals("")) {
+            if (value.isEmpty()) {
                 nullCount += 1;
             }
         }
@@ -37,10 +42,10 @@ public class CHICrashReducer
         outputStr.append(" ");
     }
 
-    private void getMax(Iterable<Text> values, StringBuilder outputStr) {
+    private void getMax(List<String> values, StringBuilder outputStr) {
         int maxValue = Integer.MIN_VALUE;
-        for (Text value : values) {
-            if (!value.toString().equals("")) {
+        for (String value : values) {
+            if (!value.isEmpty()) {
                 int year = Integer.parseInt(value.toString());
                 maxValue = Math.max(maxValue, year);
             }
@@ -51,10 +56,10 @@ public class CHICrashReducer
         
     }
 
-    private void getMin(Iterable<Text> values, StringBuilder outputStr) {
+    private void getMin(List<String> values, StringBuilder outputStr) {
         int minValue = Integer.MAX_VALUE;
-        for (Text value : values) {
-            if (!value.toString().equals("")) {
+        for (String value : values) {
+            if (!value.isEmpty()) {
                 int year = Integer.parseInt(value.toString());
                 minValue = Math.min(minValue, year);
             }
@@ -64,24 +69,24 @@ public class CHICrashReducer
         outputStr.append(" ");
     }
 
-    // private void getAvg(Iterable<Text> values, StringBuilder outputStr) {
-    //     int totalCount = 0;
-    //     long totalSum = 0;
-    //     for (Text value : values) {
-    //         if (!value.toString().isEmpty()) {
-    //             totalSum += Integer.parseInt(value.toString());
-    //             totalCount += 1;
-    //         }
-    //     }
-    //     outputStr.append("average:");
-    //     outputStr.append(totalSum / totalCount);
-    //     outputStr.append(" ");
-    // }
-
-    private void getSum(Iterable<Text> values, StringBuilder outputStr) {
+    private void getAvg(List<String> values, StringBuilder outputStr) {
+        int totalCount = 0;
         long totalSum = 0;
-        for (Text value : values) {
-            if (!value.toString().equals("")) {
+        for (String value : values) {
+            if (!value.isEmpty()) {
+                totalSum += Integer.parseInt(value.toString());
+                totalCount += 1;
+            }
+        }
+        outputStr.append("average:");
+        outputStr.append(totalSum / totalCount);
+        outputStr.append(" ");
+    }
+
+    private void getSum(List<String> values, StringBuilder outputStr) {
+        long totalSum = 0;
+        for (String value : values) {
+            if (!value.isEmpty()) {
                 totalSum += Integer.parseInt(value.toString());
             }
         }
