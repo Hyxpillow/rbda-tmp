@@ -11,15 +11,15 @@ public class CHICrashReducer
         StringBuilder outputStr = new StringBuilder();
         getNull(values, outputStr);
         
-        if (key.get() == "CRASH_YEAR") {
+        if (key.toString() == "CRASH_YEAR") {
             getMax(values, outputStr);
             getMin(values, outputStr);
-        } else if (key.get() == "POSTED_SPEED_LIMIT") {
+        } else if (key.toString() == "POSTED_SPEED_LIMIT") {
             getMax(values, outputStr);
             getMin(values, outputStr);
             getAvg(values, outputStr);
-        } else if (key.get() == "INJURIES_TOTAL") {
-            getSum();
+        } else if (key.toString() == "INJURIES_TOTAL") {
+            getSum(values, outputStr);
         }
         context.write(key, new Text(outputStr.toString()));
     }
@@ -29,7 +29,7 @@ public class CHICrashReducer
         int nullCount = 0;
         for (Text value : values) {
             totalCount += 1;
-            if (value.get() == "") {
+            if (value.toString() == "") {
                 nullCount += 1;
             }
         }
@@ -41,8 +41,8 @@ public class CHICrashReducer
     private void getMax(Iterable<Text> values, StringBuilder outputStr) {
         int maxValue = Integer.MIN_VALUE;
         for (Text value : values) {
-            if (value.get() != "") {
-                int year = Integer.parseInt(value.get());
+            if (value.toString() != "") {
+                int year = Integer.parseInt(value.toString());
                 maxValue = Math.max(maxValue, year);
             }
         }
@@ -55,8 +55,8 @@ public class CHICrashReducer
     private void getMin(Iterable<Text> values, StringBuilder outputStr) {
         int minValue = Integer.MAX_VALUE;
         for (Text value : values) {
-            if (value.get() != "") {
-                int year = Integer.parseInt(value.get());
+            if (value.toString() != "") {
+                int year = Integer.parseInt(value.toString());
                 minValue = Math.min(minValue, year);
             }
         }
@@ -69,8 +69,8 @@ public class CHICrashReducer
         int totalCount = 0;
         long totalSum = 0;
         for (Text value : values) {
-            if (value.get() != "") {
-                totalSum += Integer.parseInt(value.get());
+            if (value.toString() != "") {
+                totalSum += Integer.parseInt(value.toString());
                 totalCount += 1;
             }
         }
@@ -82,8 +82,8 @@ public class CHICrashReducer
     private void getSum(Iterable<Text> values, StringBuilder outputStr) {
         long totalSum = 0;
         for (Text value : values) {
-            if (value.get() != "") {
-                totalSum += Integer.parseInt(value.get());
+            if (value.toString() != "") {
+                totalSum += Integer.parseInt(value.toString());
             }
         }
         outputStr.append("sum:");
