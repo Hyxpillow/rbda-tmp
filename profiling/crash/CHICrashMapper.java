@@ -29,9 +29,9 @@ public class CHICrashMapper
         throws IOException, InterruptedException {
 
         String line = value.toString();
-        String[] splitLine = line.split(",", -1);
+        List<String> splitLine = parseCSVLine(line);
 
-        for (int i = 0; i < splitLine.length; i++) {
+        for (int i = 0; i < splitLine.size(); i++) {
             String columeName = columnNames[i];
             String columeValue = splitLine[i];
             if (columeName == "CRASH_DATE") {
@@ -40,6 +40,40 @@ public class CHICrashMapper
             }
             context.write(new Text(columeName), new Text(columeValue));
         }
+    }
+
+        public static List<String> parseCSVLine(String line) {
+        List<String> result = new ArrayList<>();
+        StringBuilder currentField = new StringBuilder();
+        boolean inQuotes = false;
+
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+
+            if (inQuotes) {
+                if (c == '"') {
+                    if (i + 1 < line.length() && line.charAt(i + 1) == '"') {
+                        currentField.append(c);
+                        i++;
+                    } else {
+                        inQuotes = false;
+                    }
+                } else {
+                    currentField.append(c);
+                }
+            } else {
+                if (c == '"') {
+                    inQuotes = true;
+                } else if (c == ',') {
+                    result.add(currentField.toString());
+                    currentField.setLength(0);
+                } else {
+                    currentField.append(c);
+                }
+            }
+        }
+        result.add(currentField.toString());
+        return result;
     }
 }
 
