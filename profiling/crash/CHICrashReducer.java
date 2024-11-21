@@ -11,14 +11,14 @@ public class CHICrashReducer
         StringBuilder outputStr = new StringBuilder();
         getNull(values, outputStr);
         
-        if (key.toString() == "CRASH_YEAR") {
+        if (key.toString().equals("CRASH_YEAR")) {
             getMax(values, outputStr);
             getMin(values, outputStr);
-        } else if (key.toString() == "POSTED_SPEED_LIMIT") {
+        } else if (key.toString().equals("POSTED_SPEED_LIMIT")) {
             getMax(values, outputStr);
             getMin(values, outputStr);
             getAvg(values, outputStr);
-        } else if (key.toString() == "INJURIES_TOTAL") {
+        } else if (key.toString().equals("INJURIES_TOTAL")) {
             getSum(values, outputStr);
         }
         context.write(key, new Text(outputStr.toString()));

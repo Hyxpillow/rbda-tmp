@@ -11,6 +11,8 @@ all:
 
 run: all
 	hadoop jar crash.jar $(MAIN_CLASS) $(INPUT_FILE) $(OUTPUT_DIR)
+	hadoop fs -cat project/output/part-r-00000
 
 clean:
+	hadoop fs -cat project/output/part-r-00000
 	rm -f *.class crash.jar

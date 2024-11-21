@@ -20,7 +20,7 @@ public class CHICrash {
         job.setReducerClass(CHICrashReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
-	    job.setNumReduceTasks(5);
+	    job.setNumReduceTasks(1);
 	
 
         System.exit(job.waitForCompletion(true) ? 0 : 1);
