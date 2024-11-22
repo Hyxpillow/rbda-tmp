@@ -29,7 +29,7 @@ public class CHIWeatherMapper
         String line = value.toString();
         List<String> splitLine = parseCSVLine(line);
 
-        for (int i = 2; i < 21; i++) {
+        for (int i = 1; i < 21; i++) {
             String columeName = columnNames[i];
             if (columeName == "preciptype") {
                 continue;
