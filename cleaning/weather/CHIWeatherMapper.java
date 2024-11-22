@@ -3,11 +3,12 @@ import java.util.List;
 import java.util.ArrayList;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 
 import org.apache.hadoop.mapreduce.Mapper;
 public class CHIWeatherMapper
-    extends Mapper<LongWritable, Text, LongWritable, Text> {
+    extends Mapper<LongWritable, Text, NullWritable, Text> {
 
     @Override
     public void map(LongWritable key, Text value, Context context)
@@ -34,7 +35,7 @@ public class CHIWeatherMapper
         }
         newLine.append(rainOrNot);
 
-        context.write(key, new Text(rainOrNot));
+        context.write(NullWritable.get(), new Text(newLine.toString()));
     }
 
     public static List<String> parseCSVLine(String line) {
