@@ -4,20 +4,10 @@ import java.util.ArrayList;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.io.FloatWritable;
 
 import org.apache.hadoop.mapreduce.Mapper;
 public class CHIWeatherMapper
-    extends Mapper<LongWritable, Text, Text, FloatWritable> {
-    
-    private static final String[] columnNames = {
-        "name", "datetime", "tempmax", "tempmin", "temp", "feelslikemax", 
-        "feelslikemin", "feelslike", "dew", "humidity", "precip", "precipprob", 
-        "precipcover", "preciptype", "snow", "snowdepth", "windgust", 
-        "windspeed", "winddir", "sealevelpressure", "cloudcover", "visibility", 
-        "solarradiation", "solarenergy", "uvindex", "severerisk", "sunrise", 
-        "sunset", "moonphase", "conditions", "description", "icon", "stations"
-    };
+    extends Mapper<LongWritable, Text, LongWritable, Text> {
 
     @Override
     public void map(LongWritable key, Text value, Context context)
@@ -29,14 +19,22 @@ public class CHIWeatherMapper
         String line = value.toString();
         List<String> splitLine = parseCSVLine(line);
 
-        for (int i = 1; i < 21; i++) {
-            String columeName = columnNames[i];
-            if (columeName == "preciptype") {
-                continue;
-            }
-            float columeValue = Float.parseFloat(splitLine.get(i));
-            context.write(new Text(columeName), new FloatWritable(columeValue));
+
+        StringBuilder newLine = new StringBuilder();
+        newLine.append(splitLine.get(1));
+        newLine.append(",");
+        newLine.append(splitLine.get(4));
+        newLine.append(",");
+        String conditions = splitLine.get(29);
+        String rainOrNot;
+        if (conditions.contains("Rain")) {
+            rainOrNot = "1";
+        } else {
+            rainOrNot = "0";
         }
+        newLine.append(rainOrNot);
+
+        context.write(key, new Text(rainOrNot));
     }
 
     public static List<String> parseCSVLine(String line) {

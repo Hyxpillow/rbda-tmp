@@ -12,7 +12,7 @@ public class CHIWeather {
 
         Job job = Job.getInstance();
         job.setJarByClass(CHIWeather.class);
-        job.setJobName("Chicago Weather Profiling");
+        job.setJobName("Chicago Weather Cleaning");
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
