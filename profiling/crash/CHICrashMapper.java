@@ -6,7 +6,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 public class CHICrashMapper
-    extends Mapper<LongWritable, Text, Text, FloatWritable> {
+    extends Mapper<LongWritable, Text, Text, Text> {
 
     private static final String[] columnNames = {
         "CRASH_RECORD_ID", "CRASH_DATE_EST_I", "CRASH_DATE", "POSTED_SPEED_LIMIT",
