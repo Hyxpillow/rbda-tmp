@@ -11,4 +11,6 @@ TARGET=$1
 COMMAND=$2
 
 cd $TARGET
+# Redirect to Makefile in subfolders
+# The Java and Hadoop command lines are in those Makefiles
 make $COMMAND
