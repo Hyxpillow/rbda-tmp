@@ -3,6 +3,9 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.io.FloatWritable;
+import java.util.List;
+import java.util.ArrayList;
+
 public class CHIWeatherReducer
     extends Reducer<Text, FloatWritable, Text, Text> {
 
