@@ -18,6 +18,7 @@ public class CHIWeather {
 
         job.setMapperClass(CHIWeatherMapper.class);
         job.setReducerClass(CHIWeatherReducer.class);
+        job.setMapOutputValueClass(FloatWritable.class); 
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
 	    job.setNumReduceTasks(1);
