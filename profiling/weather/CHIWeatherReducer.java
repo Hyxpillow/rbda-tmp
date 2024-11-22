@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class CHIWeatherReducer
     extends Reducer<Text, FloatWritable, Text, Text> {
 
+    @Override
     public void reduce(Text key, Iterable<FloatWritable> values, Context context)
         throws IOException, InterruptedException {
         
