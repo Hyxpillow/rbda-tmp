@@ -1,5 +1,5 @@
 
-MAIN_CLASS = CHICrash
+MAIN_CLASS = CHIWeather
 INPUT_FILE = project/weather.csv
 OUTPUT_DIR = project/output/weather
 
