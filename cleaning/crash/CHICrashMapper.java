@@ -16,7 +16,7 @@ public class CHICrashMapper
         }
         String line = value.toString();
         String[] splitLine = line.split(",");
-        String crashDate = splitLine[1];
+        String crashDate = splitLine[2];
         String dateWithoutHour = crashDate.substring(0,10);
         
         context.write(new Text(dateWithoutHour), new IntWritable(1));
