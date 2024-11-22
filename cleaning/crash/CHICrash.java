@@ -1,5 +1,6 @@
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -12,14 +13,15 @@ public class CHICrash {
 
         Job job = Job.getInstance();
         job.setJarByClass(CHICrash.class);
-        job.setJobName("Chicago Crash Profiling");
+        job.setJobName("Chicago Crash Cleaning");
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         job.setMapperClass(CHICrashMapper.class);
+        job.setCombinerClass(CHICrashReducer.class);
         job.setReducerClass(CHICrashReducer.class);
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
 	    job.setNumReduceTasks(1);
 	
 
