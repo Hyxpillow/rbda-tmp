@@ -9,7 +9,7 @@ all:
 	javac -classpath `hadoop classpath` *.java
 	jar cvf weather.jar *.class
 
-run: all
+run: clean all
 	hadoop jar weather.jar $(MAIN_CLASS) $(INPUT_FILE) $(OUTPUT_DIR)
 	hadoop fs -cat project/output/weather/part-r-00000
 

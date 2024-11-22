@@ -9,7 +9,7 @@ all:
 	javac -classpath `hadoop classpath` *.java
 	jar cvf crash.jar *.class
 
-run: all
+run: clean all
 	hadoop jar crash.jar $(MAIN_CLASS) $(INPUT_FILE) $(OUTPUT_DIR)
 	hadoop fs -cat project/output/crash/part-r-00000
 
