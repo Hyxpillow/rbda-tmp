@@ -43,7 +43,19 @@ public class CHIWeatherReducer
         outputStr.append(minValue);
         outputStr.append(" ");
     }
+
     private void getAvg(List<Float> values, StringBuilder outputStr) {
+        int totalCount = values.size();
+        float totalSum = 0;
+        for (Float value : values) {
+            totalSum += value
+        }
+        outputStr.append("avg:");
+        outputStr.append(totalSum / totalCount);
+        outputStr.append(" ");
+    }
+
+    private void getStd(List<Float> values, StringBuilder outputStr) {
         int totalCount = values.size();
         float totalSum = 0;
         for (Float value : values) {
