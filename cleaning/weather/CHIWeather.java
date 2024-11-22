@@ -1,6 +1,7 @@
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class CHIWeather {
@@ -18,7 +19,7 @@ public class CHIWeather {
 
         job.setMapperClass(CHIWeatherMapper.class);
         job.setReducerClass(CHIWeatherReducer.class);
-        job.setOutputKeyClass(Text.class);
+        job.setOutputKeyClass(LongWritable.class);
         job.setOutputValueClass(Text.class);
 	    job.setNumReduceTasks(1);
 
