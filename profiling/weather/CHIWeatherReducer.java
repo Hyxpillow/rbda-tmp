@@ -48,7 +48,7 @@ public class CHIWeatherReducer
         int totalCount = values.size();
         float totalSum = 0;
         for (Float value : values) {
-            totalSum += value
+            totalSum += value;
         }
         outputStr.append("avg:");
         outputStr.append(totalSum / totalCount);
