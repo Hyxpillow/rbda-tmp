@@ -31,7 +31,7 @@ public class CHIWeatherMapper
 
         for (int i = 2; i < 21; i++) {
             String columeName = columnNames[i];
-            if (columeName == "preciptype") {
+            if (columeName.equals("preciptype")) {
                 continue;
             }
             float columeValue = Float.parseFloat(splitLine.get(i));
