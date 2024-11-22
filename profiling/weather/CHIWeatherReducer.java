@@ -44,7 +44,7 @@ public class CHIWeatherReducer
         int totalCount = values.size();
         float totalSum = 0;
         for (Float value : values) {
-            totalSum += value
+            totalSum += value;
         }
         float mean = totalSum / totalCount;
         float varianceSum = 0;
