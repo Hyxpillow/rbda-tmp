@@ -20,10 +20,11 @@ public class CHICrashJoinWeather {
         FileInputFormat.addInputPath(jobCrashCleaning, new Path(args[0]));
         FileOutputFormat.setOutputPath(jobCrashCleaning, new Path("project/output/crash_clean"));
         jobCrashCleaning.setMapperClass(CHICrashMapper.class);
-        jobCrashCleaning.setCombinerClass(CHICrashReducer.class);
         jobCrashCleaning.setReducerClass(CHICrashReducer.class);
-        jobCrashCleaning.setOutputKeyClass(Text.class);
-        jobCrashCleaning.setOutputValueClass(IntWritable.class);
+        jobCrashCleaning.setMapOutputKeyClass(Text.class);
+        jobCrashCleaning.setMapOutputValueClass(IntWritable.class);
+        jobCrashCleaning.setReduceOutputKeyClass(NullWritable.class);
+        jobCrashCleaning.setReduceOutputValueClass(Text.class);
 	    jobCrashCleaning.setNumReduceTasks(1);
         jobCrashCleaning.waitForCompletion(true);
 
