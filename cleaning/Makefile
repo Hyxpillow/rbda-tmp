@@ -1,5 +1,5 @@
 
-MAIN_CLASS = join.CHIJoin
+MAIN_CLASS = join/CHIJoin
 INPUT_FILE1 = project/crashes.csv
 INPUT_FILE2 = project/weather.csv
 OUTPUT_DIR = project/output/join
