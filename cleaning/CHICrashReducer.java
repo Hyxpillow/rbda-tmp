@@ -20,7 +20,7 @@ public class CHICrashReducer
         }
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(key.get(), inputFormat);
+        LocalDate date = LocalDate.parse(key.toString(), inputFormat);
         String formattedDate = date.format(outputFormat);
 
         StringBuilder newLine = new StringBuilder();
