@@ -22,7 +22,10 @@ public class CHICrashJoinWeather {
         jobCrashCleaning.setMapperClass(CHICrashMapper.class);
         jobCrashCleaning.setCombinerClass(CHICrashReducer.class);
         jobCrashCleaning.setReducerClass(CHICrashReducer.class);
-
+        jobWeatherCleaning.setMapOutputKeyClass(Text.class);
+        jobWeatherCleaning.setMapOutputValueClass(IntWritable.class);
+        jobWeatherCleaning.setReduceOutputKeyClass(NullWritable.class);
+        jobWeatherCleaning.setReduceOutputValueClass(Text.class);
 	    jobCrashCleaning.setNumReduceTasks(1);
         jobCrashCleaning.waitForCompletion(true);
 
