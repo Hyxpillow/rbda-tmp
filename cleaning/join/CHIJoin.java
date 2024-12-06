@@ -50,12 +50,12 @@ public class CHIJoin {
         MultipleInputs.addInputPath(jobJoin, new Path("project/output/crash_clean/part-r-00000"), TextInputFormat.class, CHIJoinCrashMapper.class);
         MultipleInputs.addInputPath(jobJoin, new Path("project/output/weather_clean/part-r-00000"), TextInputFormat.class, CHIJoinWeatherMapper.class);
         FileOutputFormat.setOutputPath(jobJoin, new Path(args[2]));
+        jobJoin.setReducerClass(CHIJoinReducer.class);
         jobJoin.setMapOutputKeyClass(Text.class);
         jobJoin.setMapOutputValueClass(Text.class);
         jobJoin.setOutputKeyClass(NullWritable.class);
         jobJoin.setOutputValueClass(Text.class);
 	    jobJoin.setNumReduceTasks(1);
         jobJoin.waitForCompletion(true);
-
     }
 }

@@ -7,7 +7,7 @@ OUTPUT_DIR = project/output/join
 .PHONY: all clean
 
 all:
-	javac -classpath `hadoop classpath` *.java
+	javac -classpath `hadoop classpath` crash/*.java weather/*.java join/*.java
 	jar cvf join.jar *.class
 
 run: all
