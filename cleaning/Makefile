@@ -8,7 +8,7 @@ OUTPUT_DIR = project/output/join
 
 all:
 	javac -classpath `hadoop classpath` crash/*.java weather/*.java join/*.java
-	jar cvf join.jar *.class
+	jar cvf join.jar crash/*.class weather/*.class join/*.class
 
 run: all
 	hadoop jar join.jar $(MAIN_CLASS) $(INPUT_FILE1) $(INPUT_FILE2) $(OUTPUT_DIR)
