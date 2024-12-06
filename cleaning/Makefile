@@ -16,4 +16,4 @@ run: all
 
 clean:
 	hadoop fs -rm -r project/output
-	rm -f *.class join.jar
+	rm -f crash/*.class weather/*.class join/*.class *.class join.jar
