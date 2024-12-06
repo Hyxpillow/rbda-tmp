@@ -1,5 +1,5 @@
 
-MAIN_CLASS = CHIJoin
+MAIN_CLASS = join.CHIJoin
 INPUT_FILE1 = project/crashes.csv
 INPUT_FILE2 = project/weather.csv
 OUTPUT_DIR = project/output/join
@@ -7,7 +7,7 @@ OUTPUT_DIR = project/output/join
 .PHONY: all clean
 
 all:
-	javac -classpath `hadoop classpath` crash/*.java weather/*.java join/*.java
+	javac -classpath `hadoop classpath` crash/*.java weather/*.java join/*.java -d .
 	jar cvf join.jar crash/*.class weather/*.class join/*.class
 
 run: all
