@@ -7,8 +7,8 @@ OUTPUT_DIR = project/output/join
 .PHONY: all clean
 
 all:
-	javac -classpath `hadoop classpath` *.java crash/*.java weather/*.java join/*.java
-	jar cvf join.jar *.class crash/*.class weather/*.class join/*.class
+	javac -classpath `hadoop classpath` crash/*.java weather/*.java join/*.java *.java
+	jar cvf join.jar crash/*.class weather/*.class join/*.class *.class
 
 run: all
 	hadoop jar join.jar $(MAIN_CLASS) $(INPUT_FILE1) $(INPUT_FILE2) $(OUTPUT_DIR)
