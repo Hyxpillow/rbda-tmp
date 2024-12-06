@@ -9,14 +9,6 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import crash.CHICrashMapper;
-import crash.CHICrashReducer;
-import weather.CHIWeatherMapper;
-import weather.CHIWeatherReducer;
-import join.CHIJoinCrashMapper;
-import join.CHIJoinWeatherMapper;
-import join.CHIJoinReducer;
-
 public class CHIJoin {
     public static void main(String[] args) throws Exception {
         if (args.length != 3) {
