@@ -14,8 +14,8 @@ public class CHIJoinReducer
     public void reduce(Text key, Iterable<Text> values, Context context)
         throws IOException, InterruptedException {
         
-        String crashLine;
-        String weatherLine;
+        String crashLine = null;
+        String weatherLine = null;
         
         for (Text value : values) {
             if (value.charAt(0) == 'C') { // Crash
