@@ -15,9 +15,6 @@ public class CHIJoinReducer
         throws IOException, InterruptedException {
         
         String crashDate = key.toString();
-        if (crashDate.compareTo("2017-05-01") < 0 || crashDate.compareTo("2024-11-18") > 0) { // magic
-            return;
-        }
 
         int crashCount = 0;
         String weatherLine = null;
