@@ -1,4 +1,4 @@
-package weather;
+package cleanweather;
 
 import java.io.IOException;
 import java.util.List;

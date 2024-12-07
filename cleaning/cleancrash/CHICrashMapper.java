@@ -1,4 +1,4 @@
-package crash;
+package cleancrash;
 
 import java.io.IOException;
 import java.util.List;
