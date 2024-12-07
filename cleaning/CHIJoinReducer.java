@@ -17,30 +17,24 @@ public class CHIJoinReducer
         throws IOException, InterruptedException {
         
         String crashDate = key.toString();
-        if (crashDate.compareTo("2017-05-01") < 0 || crashDate.compareTo("2024-11-18") > 0) {
+        if (crashDate.compareTo("2017-05-01") < 0 || crashDate.compareTo("2024-11-18") > 0) { // magic
             return;
         }
 
-        String crashLine = null;
+        int crashCount = null;
         String weatherLine = null;
-        
         for (Text value : values) {
             if (value.charAt(0) == 'C') { // Crash
-                crashLine = value.toString().substring(1);
+                crashCount += 1;
             } else if (value.charAt(0) == 'W') { // Weather
                 weatherLine = value.toString().substring(1);
             }
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append(key.toString());
-        sb.append(",");
-        sb.append(crashLine);
-        sb.append(",");
-        sb.append(weatherLine);
-        // header: 
-        //   date, crashCount, Temperature, Feelslike, humidity, windgust, windspeed, sealevelpressure, cloudcover, visibility, solarradiation
-        context.write(NullWritable.get(), new Text(sb.toString()));
-
+        //date, Temperature, humidity, visibility, rain or not
+        String outputValue = crashDate + "," + weatherLine;
+        for (int i = 0; i < crashCount; i++) {
+            context.write(NullWritable.get(), new Text(outputValue));
+        }
     }
 }
 

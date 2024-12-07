@@ -1,4 +1,4 @@
-package cleancrash;
+package join;
 
 import java.io.IOException;
 import java.util.List;
@@ -7,8 +7,12 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
-public class CHICrashMapper
-    extends Mapper<LongWritable, Text, Text, IntWritable> {
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class CHIJoinCrashMapper
+    extends Mapper<LongWritable, Text, Text, Text> {
 
     @Override
     public void map(LongWritable key, Text value, Context context)
@@ -20,8 +24,12 @@ public class CHICrashMapper
         String[] splitLine = line.split(",");
         String crashDate = splitLine[2];
         String dateWithoutHour = crashDate.substring(0,10);
+
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(key.toString(), inputFormat);
+        crashDate = date.format(outputFormat);
         
-        context.write(new Text(dateWithoutHour), new IntWritable(1));
+        context.write(new Text(crashDate), new Text("Crash"));
     }
 }
-

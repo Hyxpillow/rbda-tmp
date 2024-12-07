@@ -9,13 +9,6 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import cleancrash.CHICrashMapper;
-import cleancrash.CHICrashReducer;
-import cleanweather.CHIWeatherMapper;
-import cleanweather.CHIWeatherReducer;
-import join.CHIJoinCrashMapper;
-import join.CHIJoinWeatherMapper;
-import join.CHIJoinReducer;
 
 public class CHIJoin {
     public static void main(String[] args) throws Exception {
@@ -24,39 +17,11 @@ public class CHIJoin {
             System.exit(-1);
         }
 
-        Job jobCrashCleaning = Job.getInstance();
-        jobCrashCleaning.setJarByClass(CHIJoin.class);
-        jobCrashCleaning.setJobName("Chicago Crash Data Cleaning");
-        FileInputFormat.addInputPath(jobCrashCleaning, new Path(args[0]));
-        FileOutputFormat.setOutputPath(jobCrashCleaning, new Path("project/output/crash_clean"));
-        jobCrashCleaning.setMapperClass(CHICrashMapper.class);
-        jobCrashCleaning.setReducerClass(CHICrashReducer.class);
-        jobCrashCleaning.setMapOutputKeyClass(Text.class);
-        jobCrashCleaning.setMapOutputValueClass(IntWritable.class);
-        jobCrashCleaning.setOutputKeyClass(NullWritable.class);
-        jobCrashCleaning.setOutputValueClass(Text.class);
-	    jobCrashCleaning.setNumReduceTasks(1);
-        jobCrashCleaning.waitForCompletion(true);
-
-        Job jobWeatherCleaning = Job.getInstance();
-        jobWeatherCleaning.setJarByClass(CHIJoin.class);
-        jobWeatherCleaning.setJobName("Chicago Weather Data Cleaning");
-        FileInputFormat.addInputPath(jobWeatherCleaning, new Path(args[1]));
-        FileOutputFormat.setOutputPath(jobWeatherCleaning, new Path("project/output/weather_clean"));
-        jobWeatherCleaning.setMapperClass(CHIWeatherMapper.class);
-        jobWeatherCleaning.setReducerClass(CHIWeatherReducer.class);
-        jobWeatherCleaning.setOutputKeyClass(NullWritable.class);
-        jobWeatherCleaning.setOutputValueClass(Text.class);
-	    jobWeatherCleaning.setNumReduceTasks(1);
-        jobWeatherCleaning.waitForCompletion(true);
-
-        // all good before here
-
         Job jobJoin = Job.getInstance();
         jobJoin.setJarByClass(CHIJoin.class);
         jobJoin.setJobName("Chicago Crash Join Weather");
-        MultipleInputs.addInputPath(jobJoin, new Path("project/output/crash_clean/part-r-00000"), TextInputFormat.class, CHIJoinCrashMapper.class);
-        MultipleInputs.addInputPath(jobJoin, new Path("project/output/weather_clean/part-r-00000"), TextInputFormat.class, CHIJoinWeatherMapper.class);
+        MultipleInputs.addInputPath(jobJoin, new Path(args[0]), TextInputFormat.class, CHIJoinCrashMapper.class);
+        MultipleInputs.addInputPath(jobJoin, new Path(args[1]), TextInputFormat.class, CHIJoinWeatherMapper.class);
         FileOutputFormat.setOutputPath(jobJoin, new Path(args[2]));
         jobJoin.setReducerClass(CHIJoinReducer.class);
         jobJoin.setMapOutputKeyClass(Text.class);

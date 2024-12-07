@@ -1,16 +1,15 @@
-package cleanweather;
+package join;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
-
 import org.apache.hadoop.mapreduce.Mapper;
-public class CHIWeatherMapper
-    extends Mapper<LongWritable, Text, NullWritable, Text> {
+
+public class CHIJoinWeatherMapper
+    extends Mapper<LongWritable, Text, Text, Text> {
 
     @Override
     public void map(LongWritable key, Text value, Context context)
@@ -21,12 +20,10 @@ public class CHIWeatherMapper
 
         String line = value.toString();
         List<String> splitLine = parseCSVLine(line);
-
+        String crashDate = splitLine.get(1);
 
         StringBuilder newLine = new StringBuilder();
-        newLine.append(splitLine.get(1)); // Date
-        newLine.append(",");
-        newLine.append(splitLine.get(4)); // Temperature
+        newLine.append(splitLine.get(4)); // temperature
         newLine.append(",");
         newLine.append(splitLine.get(9)); // humidity
         newLine.append(",");
@@ -41,7 +38,7 @@ public class CHIWeatherMapper
         }
         newLine.append(rainOrNot);
 
-        context.write(NullWritable.get(), new Text(newLine.toString()));
+        context.write(crashDate, new Text(newLine.toString()));
     }
 
     public static List<String> parseCSVLine(String line) {
@@ -78,6 +75,3 @@ public class CHIWeatherMapper
         return result;
     }
 }
-
-
-
