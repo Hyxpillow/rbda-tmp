@@ -25,7 +25,7 @@ public class CHIJoinCrashMapper
 
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(key.toString(), inputFormat);
+        LocalDate date = LocalDate.parse(dateWithoutHour, inputFormat);
         crashDate = date.format(outputFormat);
         
         context.write(new Text(crashDate), new Text("Crash"));
