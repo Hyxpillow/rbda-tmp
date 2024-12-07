@@ -36,7 +36,7 @@ public class CHIJoinWeatherMapper
         }
         newLine.append(rainOrNot);
 
-        context.write(crashDate, new Text(newLine.toString()));
+        context.write(new Text(crashDate), new Text(newLine.toString()));
     }
 
     public static List<String> parseCSVLine(String line) {

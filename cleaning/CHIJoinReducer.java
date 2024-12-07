@@ -19,7 +19,7 @@ public class CHIJoinReducer
             return;
         }
 
-        int crashCount = null;
+        int crashCount = 0;
         String weatherLine = null;
         for (Text value : values) {
             if (value.charAt(0) == 'C') { // Crash
