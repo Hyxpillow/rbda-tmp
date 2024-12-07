@@ -16,6 +16,11 @@ public class CHIJoinReducer
     public void reduce(Text key, Iterable<Text> values, Context context)
         throws IOException, InterruptedException {
         
+        String crashDate = key.toString();
+        if (crashDate.compareTo("2017-05-01") < 0 || crashDate.compareTo("2024-11-18") > 0) {
+            return;
+        }
+
         String crashLine = null;
         String weatherLine = null;
         

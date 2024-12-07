@@ -24,9 +24,25 @@ public class CHIWeatherMapper
 
 
         StringBuilder newLine = new StringBuilder();
-        newLine.append(splitLine.get(1));
+        newLine.append(splitLine.get(1)); // Date
         newLine.append(",");
-        newLine.append(splitLine.get(4));
+        newLine.append(splitLine.get(4)); // Temperature
+        newLine.append(",");
+        newLine.append(splitLine.get(7)); // Feelslike
+        newLine.append(",");
+        newLine.append(splitLine.get(9)); // humidity
+        newLine.append(",");
+        newLine.append(splitLine.get(16)); // windgust
+        newLine.append(",");
+        newLine.append(splitLine.get(17)); // windspeed
+        newLine.append(",");
+        newLine.append(splitLine.get(19)); // sealevelpressure
+        newLine.append(",");
+        newLine.append(splitLine.get(20)); // cloudcover
+        newLine.append(",");
+        newLine.append(splitLine.get(21)); // visibility
+        newLine.append(",");
+        newLine.append(splitLine.get(22)); // solarradiation
         newLine.append(",");
         String conditions = splitLine.get(29);
         String rainOrNot;

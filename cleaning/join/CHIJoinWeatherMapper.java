@@ -15,12 +15,11 @@ public class CHIJoinWeatherMapper
     public void map(LongWritable key, Text value, Context context)
         throws IOException, InterruptedException {
         String line = value.toString();
-        String[] splitLine = line.split(",");
+        String[] splitLine = line.split(",", 2);
 
         String weatherDate = splitLine[0];
-        String weatherTemp = splitLine[1];
-        String weatherRain = splitLine[2];
+        String weatherRest = splitLine[1];
         
-        context.write(new Text(weatherDate), new Text("W" + weatherTemp + "," + weatherRain));
+        context.write(new Text(weatherDate), new Text("W" + weatherRest));
     }
 }
