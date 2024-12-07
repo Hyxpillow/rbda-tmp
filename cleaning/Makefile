@@ -10,9 +10,10 @@ all:
 	javac -classpath `hadoop classpath` *.java
 	jar cvf join.jar *.class
 
+# hadoop fs -cat $(OUTPUT_DIR)/part-r-00000
 run: all
 	hadoop jar join.jar $(MAIN_CLASS) $(INPUT_FILE1) $(INPUT_FILE2) $(OUTPUT_DIR)
-	hadoop fs -cat $(OUTPUT_DIR)/part-r-00000
+	hadoop fs -tail $(OUTPUT_DIR)/part-r-00000
 
 clean:
 	hadoop fs -rm -r project/output
