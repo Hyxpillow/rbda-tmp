@@ -37,7 +37,8 @@ public class CHIJoinReducer
         sb.append(crashLine);
         sb.append(",");
         sb.append(weatherLine);
-
+        // header: 
+        //   date, crashCount, Temperature, Feelslike, humidity, windgust, windspeed, sealevelpressure, cloudcover, visibility, solarradiation
         context.write(NullWritable.get(), new Text(sb.toString()));
 
     }
