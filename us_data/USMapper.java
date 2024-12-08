@@ -10,7 +10,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class CHIJoinCrashMapper
+public class USMapper
     extends Mapper<LongWritable, Text, NullWritable, Text> {
 
     @Override
