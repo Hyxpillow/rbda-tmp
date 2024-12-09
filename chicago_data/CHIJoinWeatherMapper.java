@@ -36,7 +36,6 @@ public class CHIJoinWeatherMapper
         newLine.append(",");
         newLine.append(visibility); // visibility
         newLine.append(",");
-        String conditions = splitLine.get(29);
         String rainOrNot;
         if (conditions.contains("Rain")) {
             rainOrNot = "1";
