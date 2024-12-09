@@ -26,16 +26,25 @@ public class USMapper
 
         StringBuilder newLine = new StringBuilder();
         String dateWithoutHour = splitLine.get(3).substring(0,10);
+
+        String temperature = splitLine.get(20);
+        String humidity = splitLine.get(22);
+        String visibility = splitLine.get(24);
+        String conditions = splitLine.get(28);
+
+        if (temperature.isEmpty() || humidity.isEmpty() || visibility.isEmpty() || conditions.isEmpty()) {
+            return;
+        }
+
         newLine.append(dateWithoutHour);
         newLine.append(",");
-        newLine.append(splitLine.get(20));
+        newLine.append(temperature);
         newLine.append(",");
-        newLine.append(splitLine.get(22));
+        newLine.append(humidity);
         newLine.append(",");
-        newLine.append(splitLine.get(24));
+        newLine.append(visibility);
         newLine.append(",");
-
-        String conditions = splitLine.get(28);
+        
         String rainOrNot;
         if (conditions.contains("Rain") || conditions.contains("Snow")) {
             rainOrNot = "1";
