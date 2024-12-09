@@ -13,4 +13,4 @@ location '/user/yh5047_nyu_edu/project/output/part-r-00000';
 
 SELECT COUNT(*) FROM crash_with_weather;
 
-SELECT COUNT(*) FROM crash_with_weather GROUP ;
+SELECT COUNT(*) FROM crash_with_weather GROUP BY rain_or_not;
