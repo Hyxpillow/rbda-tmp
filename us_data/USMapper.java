@@ -39,13 +39,12 @@ public class USMapper
         String rainOrNot;
         if (conditions.contains("Rain") || conditions.contains("Snow")) {
             rainOrNot = "1";
-            context.write(NullWritable.get(), new Text(newLine.toString()));
         } else {
             rainOrNot = "0";
         }
         newLine.append(rainOrNot);
 
-        
+        context.write(NullWritable.get(), new Text(newLine.toString()));
     }
 
     public static List<String> parseCSVLine(String line) {
