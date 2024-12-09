@@ -20,12 +20,21 @@ public class CHIJoinWeatherMapper
         List<String> splitLine = parseCSVLine(line);
         String crashDate = splitLine.get(1);
 
+        String temperature = splitLine.get(4);
+        String humidity = splitLine.get(9);
+        String visibility = splitLine.get(21);
+        String conditions = splitLine.get(29);
+
+        if (temperature.isEmpty() || humidity.isEmpty() || visibility.isEmpty() || conditions.isEmpty()) {
+            return;
+        }
+
         StringBuilder newLine = new StringBuilder();
-        newLine.append(splitLine.get(4)); // temperature
+        newLine.append(temperature); // temperature
         newLine.append(",");
-        newLine.append(splitLine.get(9)); // humidity
+        newLine.append(humidity); // humidity
         newLine.append(",");
-        newLine.append(splitLine.get(21)); // visibility
+        newLine.append(visibility); // visibility
         newLine.append(",");
         String conditions = splitLine.get(29);
         String rainOrNot;

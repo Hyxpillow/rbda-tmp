@@ -25,6 +25,9 @@ public class CHIJoinReducer
                 weatherLine = value.toString().substring(1);
             }
         }
+        if (weatherLine == null || weatherLine.isEmpty()) {
+            return;
+        }
         //date, Temperature, humidity, visibility, rain or not
         String outputValue = crashDate + "," + weatherLine;
         for (int i = 0; i < crashCount; i++) {
