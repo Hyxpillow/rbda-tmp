@@ -1,6 +1,6 @@
 MAIN_CLASS=CHIJoin
-INPUT_FILE1=project/crashes.csv
-INPUT_FILE2=project/weather.csv
+INPUT_FILE1=project/crashes_chicago.csv
+INPUT_FILE2=project/weather_chicago.csv
 OUTPUT_DIR=project/output/chicago
 
 javac -classpath `hadoop classpath` *.java
