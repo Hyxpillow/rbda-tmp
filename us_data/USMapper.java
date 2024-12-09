@@ -34,14 +34,16 @@ public class USMapper
         newLine.append(",");
         newLine.append(splitLine.get(24));
         newLine.append(",");
-        String conditions = splitLine.get(28);
-        String rainOrNot;
-        if (conditions.contains("Rain")) {
-            rainOrNot = "1";
-        } else {
-            rainOrNot = "0";
-        }
-        newLine.append(rainOrNot);
+        
+        newLine.append(splitLine.get(28));
+        // String conditions = splitLine.get(28);
+        // String rainOrNot;
+        // if (conditions.contains("Rain") || conditions.contains("Snow")) {
+        //     rainOrNot = "1";
+        // } else {
+        //     rainOrNot = "0";
+        // }
+        // newLine.append(rainOrNot);
 
         context.write(NullWritable.get(), new Text(newLine.toString()));
     }
