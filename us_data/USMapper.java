@@ -37,7 +37,7 @@ public class USMapper
 
         String conditions = splitLine.get(28);
         String rainOrNot;
-        if (!conditions.contains("Clear")) {
+        if (conditions.contains("Rain") || conditions.contains("Snow")) {
             rainOrNot = "1";
         } else {
             rainOrNot = "0";
