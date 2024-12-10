@@ -38,7 +38,9 @@ public class USMapper
 
         newLine.append(dateWithoutHour);
         newLine.append(",");
-        newLine.append(temperature);
+        double tempDoubleF = Double.parseDouble(temperature);
+        double tempDoubleC = fahrenheitToCelsius(tempDoubleF);
+        newLine.append(tempDoubleC);
         newLine.append(",");
         newLine.append(humidity);
         newLine.append(",");
@@ -54,6 +56,10 @@ public class USMapper
         newLine.append(rainOrNot);
 
         context.write(NullWritable.get(), new Text(newLine.toString()));
+    }
+
+    public static double fahrenheitToCelsius(double fahrenheit) {
+        return (fahrenheit - 32) * 5 / 9;
     }
 
     public static List<String> parseCSVLine(String line) {
