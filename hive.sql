@@ -58,3 +58,42 @@ GROUP BY
         ELSE '81-100'
     END
 ORDER BY accident_count DESC;
+
+/* Impact of visibility */
+SELECT 
+    CASE 
+        WHEN visibility < 14 THEN 'below 14'
+        WHEN visibility BETWEEN 14 AND 16 THEN '14-16'
+        WHEN visibility BETWEEN 16 AND 18 THEN '16-18'
+        ELSE 'above 18'
+    END AS visibility_range,
+    COUNT(*) AS accident_count
+FROM crash_with_weather
+GROUP BY 
+    CASE 
+        WHEN visibility < 14 THEN 'below 14'
+        WHEN visibility BETWEEN 14 AND 16 THEN '14-16'
+        WHEN visibility BETWEEN 16 AND 18 THEN '16-18'
+        ELSE 'above 18'
+    END
+ORDER BY accident_count DESC;
+
+/* Impact of season */
+SELECT 
+    CASE 
+        WHEN MONTH(crash_date) IN (12, 1, 2) THEN 'Winter'
+        WHEN MONTH(crash_date) IN (3, 4, 5) THEN 'Spring'
+        WHEN MONTH(crash_date) IN (6, 7, 8) THEN 'Summer'
+        ELSE 'Fall'
+    END AS season,
+    COUNT(*) AS accident_count
+FROM crash_with_weather
+GROUP BY 
+    CASE 
+        WHEN MONTH(crash_date) IN (12, 1, 2) THEN 'Winter'
+        WHEN MONTH(crash_date) IN (3, 4, 5) THEN 'Spring'
+        WHEN MONTH(crash_date) IN (6, 7, 8) THEN 'Summer'
+        ELSE 'Fall'
+    END
+ORDER BY accident_count DESC;
+
