@@ -44,7 +44,9 @@ public class USMapper
         newLine.append(",");
         newLine.append(humidity);
         newLine.append(",");
-        newLine.append(visibility);
+        double visibilityMi = Double.parseDouble(visibility);
+        double visibilityKM = mileToKm(visibilityMi);
+        newLine.append(visibilityKM);
         newLine.append(",");
         
         String rainOrNot;
@@ -60,6 +62,9 @@ public class USMapper
 
     public static double fahrenheitToCelsius(double fahrenheit) {
         return (fahrenheit - 32) * 5 / 9;
+    }
+    public static double mileToKm(double miles) {
+        return miles * 1.60934;
     }
 
     public static List<String> parseCSVLine(String line) {
